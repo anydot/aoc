@@ -9,13 +9,11 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions
 {
-
     public static class Utilities
     {
-
         public static int[] ToIntArray(this string str, string delimiter = "")
         {
-            if(delimiter == "")
+            if(delimiter?.Length == 0)
             {
                 var result = new List<int>();
                 foreach(char c in str) if(int.TryParse(c.ToString(), out int n)) result.Add(n);
@@ -25,13 +23,11 @@ namespace AdventOfCode.Solutions
             {
                 return str
                     .Split(delimiter)
-                    .Where(n => int.TryParse(n, out int v))
+                    .Where(n => int.TryParse(n, out int _))
                     .Select(n => Convert.ToInt32(n))
                     .ToArray();
             }
-
         }
-
 
         public static int MinOfMany(params int[] items)
         {
@@ -103,7 +99,7 @@ namespace AdventOfCode.Solutions
         // https://github.com/tslater2006/AdventOfCode2019
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values)
         {
-            return (values.Count() == 1) ? new[] { values } : values.SelectMany(v => Permutations(values.Where(x => x.Equals(v) == false)), (v, p) => p.Prepend(v));
+            return (values.Count() == 1) ? new[] { values } : values.SelectMany(v => Permutations(values.Where(x => !x.Equals(v))), (v, p) => p.Prepend(v));
         }
 
         public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> array, int size)
@@ -117,14 +113,14 @@ namespace AdventOfCode.Solutions
         // https://stackoverflow.com/questions/49190830/is-it-possible-for-string-split-to-return-tuple
         public static void Deconstruct<T>(this IList<T> list, out T first, out IList<T> rest)
         {
-            first = list.Count > 0 ? list[0] : default(T); // or throw
+            first = list.Count > 0 ? list[0] : default; // or throw
             rest = list.Skip(1).ToList();
         }
 
         public static void Deconstruct<T>(this IList<T> list, out T first, out T second, out IList<T> rest)
         {
-            first = list.Count > 0 ? list[0] : default(T); // or throw
-            second = list.Count > 1 ? list[1] : default(T); // or throw
+            first = list.Count > 0 ? list[0] : default; // or throw
+            second = list.Count > 1 ? list[1] : default; // or throw
             rest = list.Skip(2).ToList();
         }
 

@@ -4,13 +4,10 @@ using System.Text;
 
 namespace AdventOfCode.Solutions.Year2020
 {
-
-    class Day20 : ASolution
+    public class Day20 : ASolution
     {
-
-        public Day20() : base(20, 2020, "")
+        public Day20(Config config) : base(config, 20, 2020, "")
         {
-
         }
 
         protected override string SolvePartOne()

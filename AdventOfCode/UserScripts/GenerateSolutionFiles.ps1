@@ -9,13 +9,10 @@ using System.Text;
 
 namespace AdventOfCode.Solutions.Year<YEAR>
 {
-
-    class Day<DAY> : ASolution
+    public class Day<DAY> : ASolution
     {
-
-        public Day<DAY>() : base(<DAY>, <YEAR>, `"`")
+        public Day<DAY>(Config config) : base(config, <DAY>, <YEAR>, `"`")
         {
-
         }
 
         protected override string SolvePartOne()
@@ -29,7 +26,6 @@ namespace AdventOfCode.Solutions.Year<YEAR>
         }
     }
 }
-
 "@
 
 $newDirectory = Join-Path $PSScriptRoot ".." "Solutions" "Year$Year" 
