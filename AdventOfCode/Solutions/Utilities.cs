@@ -125,5 +125,10 @@ namespace AdventOfCode.Solutions
         }
 
         public static (int, int) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
+
+        public static int[] SplitInput(this string s)
+        {
+            return s.SplitByNewline().Select(s => int.Parse(s)).ToArray();
+        }
     }
 }
