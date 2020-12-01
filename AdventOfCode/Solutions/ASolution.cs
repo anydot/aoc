@@ -1,21 +1,23 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace AdventOfCode.Solutions
 {
     public abstract class ASolution
     {
-        private readonly Lazy<string> _input, _part1, _part2;
+        private readonly Lazy<string> _input;
 
         public int Day { get; }
         public int Year { get; }
         public string Title { get; }
         public string DebugInput { get; set; }
         public string Input => DebugInput ?? (string.IsNullOrEmpty(_input.Value) ? null : _input.Value);
-        public string Part1 => string.IsNullOrEmpty(_part1.Value) ? "" : _part1.Value;
-        public string Part2 => string.IsNullOrEmpty(_part2.Value) ? "" : _part2.Value;
 
         private protected ASolution(Config config, int day, int year, string title)
         {
@@ -23,49 +25,41 @@ namespace AdventOfCode.Solutions
             Year = year;
             Title = title;
             _input = new Lazy<string>(() => LoadInput(config));
-            _part1 = new Lazy<string>(() => SolvePartOne());
-            _part2 = new Lazy<string>(() => SolvePartTwo());
         }
 
-        public void Solve(int part = 0)
+        public void Solve()
         {
-            if(Input == null) return;
+            if (Input == null) return;
 
-            bool doOutput = false;
-            string output = $"--- Day {Day}: {Title} --- \n";
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"--- Day {Day}: {Title} ---");
+
             if(DebugInput != null)
             {
-                output += $"!!! DebugInput used: {DebugInput}\n";
+                sb.AppendLine("!!! DebugInput used: {DebugInput})");
             }
 
-            if(part != 2)
+            ProcessSolutionPart(1, SolvePartOne, sb);
+            ProcessSolutionPart(2, SolvePartTwo, sb);
+
+            Console.WriteLine(sb);
+        }
+
+        private static void ProcessSolutionPart(int part, Func<IEnumerable<object>> resultFunc, StringBuilder sb)
+        {
+            var sw = Stopwatch.StartNew();
+            var result = resultFunc();
+
+            sw.Stop();
+
+            if (result == null)
             {
-                if(Part1 != "")
-                {
-                    output += $"Part 1: {Part1}\n";
-                    doOutput = true;
-                }
-                else
-                {
-                    output += "Part 1: Unsolved\n";
-                    if(part == 1) doOutput = true;
-                }
-            }
-            if(part != 1)
-            {
-                if(Part2 != "")
-                {
-                    output += $"Part 2: {Part2}\n";
-                    doOutput = true;
-                }
-                else
-                {
-                    output += "Part 2: Unsolved\n";
-                    if(part == 2) doOutput = true;
-                }
+                sb.AppendLine("Part {part}: Unsolved");
             }
 
-            if(doOutput) Console.WriteLine(output);
+            sb.AppendLine($"Part {part}, solved in {sw.ElapsedMilliseconds} ms");
+            sb.AppendLine(result.Select(r => $"== {r}{Environment.NewLine}").JoinAsStrings());
         }
 
         private string LoadInput(Config config)
@@ -114,7 +108,7 @@ namespace AdventOfCode.Solutions
             return input;
         }
 
-        protected abstract string SolvePartOne();
-        protected abstract string SolvePartTwo();
+        protected abstract IEnumerable<object> SolvePartOne();
+        protected abstract IEnumerable<object> SolvePartTwo();
     }
 }

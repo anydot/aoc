@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# RCS1197: Optimize StringBuilder.Append/AppendLine call.
+dotnet_diagnostic.RCS1197.severity = none

@@ -23,23 +23,19 @@ namespace AdventOfCode.Solutions
 
         private SolutionCollector(Config config, int year, int[] days) => Solutions = LoadSolutions(config, year, days).ToArray();
 
-        public ASolution GetSolution(int day)
-        {
-            try
-            {
-                return Solutions.Single(s => s.Day == day);
-            }
-            catch(InvalidOperationException)
-            {
-                return null;
-            }
-        }
-
         private static IEnumerable<ASolution> LoadSolutions(Config config, int year, int[] days)
         {
             if(days.Sum() == 0)
             {
-                days = Enumerable.Range(1, 25).ToArray();
+                var now = DateTimeOffset.UtcNow;
+
+                if (now.Month == 12)
+                {
+                    days = Enumerable.Range(1, now.Day).ToArray();
+                }
+                else {
+                    days = Enumerable.Range(1, 25).ToArray();
+                }
             }
 
             foreach(int day in days)

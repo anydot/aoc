@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using AdventOfCode.Solutions;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -10,12 +12,12 @@ namespace AdventOfCode.Solutions.Year2020
         {
         }
 
-        protected override string SolvePartOne()
+        protected override IEnumerable<object> SolvePartOne()
         {
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override IEnumerable<object> SolvePartTwo()
         {
             return null;
         }

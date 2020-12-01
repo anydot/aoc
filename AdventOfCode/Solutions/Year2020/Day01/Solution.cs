@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
         }
 
-        protected override string SolvePartOne()
+        protected override IEnumerable<object> SolvePartOne()
         {
             var set = new HashSet<int>(Input.SplitInput());
 
@@ -22,14 +22,12 @@ namespace AdventOfCode.Solutions.Year2020
 
                 if (set.Contains(tryB))
                 {
-                    return (a * tryB).ToString();
+                    yield return a * tryB;
                 }
             }
-
-            return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override IEnumerable<object> SolvePartTwo()
         {
             var set = new HashSet<int>(Input.SplitInput());
 
@@ -43,12 +41,10 @@ namespace AdventOfCode.Solutions.Year2020
 
                     if (set.Contains(tryC))
                     {
-                        return (a * tryB * tryC).ToString();
+                        yield return a * tryB * tryC;
                     }
                 }
             }
-
-            return null;
         }
     }
 }
