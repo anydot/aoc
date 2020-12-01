@@ -9,6 +9,8 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions
 {
+    public record Point(int X, int Y);
+
     public static class Utilities
     {
         public static int[] ToIntArray(this string str, string delimiter = "")
@@ -124,7 +126,7 @@ namespace AdventOfCode.Solutions
             rest = list.Skip(2).ToList();
         }
 
-        public static (int, int) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
+        public static Point Add(this Point a, Point b) => new(a.X + b.X, a.Y + b.Y);
 
         public static int[] SplitInput(this string s)
         {
