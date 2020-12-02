@@ -9,8 +9,6 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions
 {
-    public record Point(int X, int Y);
-
     public static class Utilities
     {
         public static int[] ToIntArray(this string str, string delimiter = "")
@@ -112,7 +110,6 @@ namespace AdventOfCode.Solutions
             }
         }
 
-        // https://stackoverflow.com/questions/49190830/is-it-possible-for-string-split-to-return-tuple
         public static void Deconstruct<T>(this IList<T> list, out T first, out IList<T> rest)
         {
             first = list.Count > 0 ? list[0] : default; // or throw
@@ -125,7 +122,5 @@ namespace AdventOfCode.Solutions
             second = list.Count > 1 ? list[1] : default; // or throw
             rest = list.Skip(2).ToList();
         }
-
-        public static Point Add(this Point a, Point b) => new(a.X + b.X, a.Y + b.Y);
     }
 }
