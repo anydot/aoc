@@ -127,10 +127,5 @@ namespace AdventOfCode.Solutions
         }
 
         public static Point Add(this Point a, Point b) => new(a.X + b.X, a.Y + b.Y);
-
-        public static int[] SplitInput(this string s)
-        {
-            return s.SplitByNewline().Select(s => int.Parse(s)).ToArray();
-        }
     }
 }

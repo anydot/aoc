@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using AdventOfCode.Solutions;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -14,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override IEnumerable<object> SolvePartOne()
         {
-            var set = new HashSet<int>(Input.SplitInput());
+            var set = new HashSet<int>(InputInts);
 
             foreach (var a in set)
             {
@@ -29,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override IEnumerable<object> SolvePartTwo()
         {
-            var set = new HashSet<int>(Input.SplitInput());
+            var set = new HashSet<int>(InputInts);
 
             foreach (var a in set)
             {

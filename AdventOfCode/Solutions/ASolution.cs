@@ -18,6 +18,8 @@ namespace AdventOfCode.Solutions
         public string Title { get; }
         public string DebugInput { get; set; }
         public string Input => DebugInput ?? (string.IsNullOrEmpty(_input.Value) ? null : _input.Value);
+        public string[] InputLines => Input.SplitByNewline();
+        public int[] InputInts => InputLines.Select(int.Parse).ToArray();
 
         private protected ASolution(Config config, int day, int year, string title)
         {
@@ -34,6 +36,8 @@ namespace AdventOfCode.Solutions
             var sb = new StringBuilder();
 
             sb.AppendLine($"--- Day {Day}: {Title} ---");
+
+            Asserts();
 
             if(DebugInput != null)
             {
@@ -110,5 +114,9 @@ namespace AdventOfCode.Solutions
 
         protected abstract IEnumerable<object> SolvePartOne();
         protected abstract IEnumerable<object> SolvePartTwo();
+
+        protected virtual void Asserts()
+        {
+        }
     }
 }
