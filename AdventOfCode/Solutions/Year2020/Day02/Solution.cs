@@ -21,5 +21,9 @@ namespace AdventOfCode.Solutions.Year2020
         {
             return null;
         }
+
+        protected override void Asserts()
+        {
+        }
     }
 }

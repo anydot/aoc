@@ -59,7 +59,8 @@ namespace AdventOfCode.Solutions
 
             if (result == null)
             {
-                sb.AppendLine("Part {part}: Unsolved");
+                sb.AppendLine($"Part {part}: Unsolved");
+                return;
             }
 
             sb.AppendLine($"Part {part}, solved in {sw.ElapsedMilliseconds} ms");

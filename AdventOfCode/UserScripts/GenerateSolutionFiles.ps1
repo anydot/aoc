@@ -26,6 +26,10 @@ namespace AdventOfCode.Solutions.Year<YEAR>
         {
             return null;
         }
+
+        protected override void Asserts()
+        {
+        }
     }
 }
 "@
