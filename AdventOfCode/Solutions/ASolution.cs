@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions
         private static void ProcessSolutionPart(int part, Func<IEnumerable<object>> resultFunc, StringBuilder sb)
         {
             var sw = Stopwatch.StartNew();
-            var result = resultFunc();
+            var result = resultFunc().ToList();
 
             sw.Stop();
 
