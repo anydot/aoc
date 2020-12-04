@@ -53,11 +53,11 @@ namespace AdventOfCode.Solutions
         private static void ProcessSolutionPart(int part, Func<IEnumerable<object>> resultFunc, StringBuilder sb)
         {
             var sw = Stopwatch.StartNew();
-            var result = resultFunc().ToList();
+            var result = (resultFunc() ?? Array.Empty<object>()).ToList();
 
             sw.Stop();
 
-            if (result == null)
+            if (result.Count == 0)
             {
                 sb.AppendLine($"Part {part}: Unsolved");
                 return;
