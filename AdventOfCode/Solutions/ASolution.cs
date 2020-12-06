@@ -37,7 +37,13 @@ namespace AdventOfCode.Solutions
 
             sb.AppendLine($"--- Day {Day}: {Title} ---");
 
-            Asserts();
+            try {
+                Asserts();
+            } catch (Exception e) {
+                sb.AppendLine($"Assert Exception: {e.Message}");
+                Console.WriteLine(sb);
+                return;
+            }
 
             if(DebugInput != null)
             {
