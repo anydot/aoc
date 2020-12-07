@@ -45,10 +45,7 @@ namespace AdventOfCode.Solutions
                 return;
             }
 
-            if(DebugInput != null)
-            {
-                sb.AppendLine("!!! DebugInput used: {DebugInput})");
-            }
+            DebugInput = null;
 
             ProcessSolutionPart(1, SolvePartOne, sb);
             ProcessSolutionPart(2, SolvePartTwo, sb);
