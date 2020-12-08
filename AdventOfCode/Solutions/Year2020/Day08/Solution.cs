@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public const string SEEN = "seen";
 
-        public record Instruction(string instruction, int value);
+        private record Instruction(string instruction, int value);
 
         public Day08(Config config) : base(config, 08, 2020, "")
         {
@@ -72,6 +72,14 @@ namespace AdventOfCode.Solutions.Year2020
             long acc;
 
             for (int ip = 0; ip < instructions.Count; ip++) {
+                if (instructions[ip].instruction switch {
+                    JMP => false,
+                    NOP => false,
+                    _ => true
+                }) {
+                    continue;
+                }
+
                 var copy = new List<Instruction>(instructions);
 
                 switch (copy[ip].instruction) {
