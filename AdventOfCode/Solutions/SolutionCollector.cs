@@ -17,7 +17,9 @@ namespace AdventOfCode.Solutions
         {
             foreach (var solution in Solutions)
             {
-                solution.Solve();
+                if (!solution.Solve()) {
+                    return;
+                }
             }
         }
 

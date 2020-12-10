@@ -21,6 +21,8 @@ namespace AdventOfCode.Solutions
         public string[] InputLines => Input.SplitByNewline();
         public int[] InputInts => InputLines.Select(int.Parse).ToArray();
 
+        public long[] InputLongs => InputLines.Select(long.Parse).ToArray();
+
         private protected ASolution(Config config, int day, int year, string title)
         {
             Day = day;
@@ -29,9 +31,12 @@ namespace AdventOfCode.Solutions
             _input = new Lazy<string>(() => LoadInput(config));
         }
 
-        public void Solve()
+        public bool Solve()
         {
-            if (Input == null) return;
+            if (Input == null)  
+            {
+                return false;
+            }
 
             var sb = new StringBuilder();
 
@@ -42,18 +47,21 @@ namespace AdventOfCode.Solutions
             } catch (Exception e) {
                 sb.AppendLine($"Assert Exception: {e.Message}");
                 Console.WriteLine(sb);
-                return;
+                return false;
             }
 
             DebugInput = null;
 
-            ProcessSolutionPart(1, SolvePartOne, sb);
-            ProcessSolutionPart(2, SolvePartTwo, sb);
+            bool retval = true;
+            retval &= ProcessSolutionPart(1, SolvePartOne, sb);
+            retval &= ProcessSolutionPart(2, SolvePartTwo, sb);
 
             Console.WriteLine(sb);
+
+            return retval;
         }
 
-        private static void ProcessSolutionPart(int part, Func<IEnumerable<object>> resultFunc, StringBuilder sb)
+        private static bool ProcessSolutionPart(int part, Func<IEnumerable<object>> resultFunc, StringBuilder sb)
         {
             var sw = Stopwatch.StartNew();
             var result = (resultFunc() ?? Array.Empty<object>()).ToList();
@@ -63,11 +71,13 @@ namespace AdventOfCode.Solutions
             if (result.Count == 0)
             {
                 sb.AppendLine($"Part {part}: Unsolved");
-                return;
+                return false;
             }
 
             sb.AppendLine($"Part {part}, solved in {sw.ElapsedMilliseconds} ms");
             sb.AppendLine(result.Select(r => $"== {r}{Environment.NewLine}").JoinAsStrings());
+
+            return true;
         }
 
         private string LoadInput(Config config)
