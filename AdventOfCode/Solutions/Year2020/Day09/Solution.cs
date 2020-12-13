@@ -28,11 +28,37 @@ namespace AdventOfCode.Solutions.Year2020
                 foreach (var i in preamble) {
                     if (preamble.Contains(num - i) && i != num - i)
                     {
-                        continue;
+                        goto next;
                     }
                 }
 
                 return numbers[offset];
+
+                next:
+                ;
+            }
+
+            throw new InvalidOperationException("Should not happen");
+        }
+
+        private long FindSum(IList<long> numbers, long targetSum) {
+            for (int i = 0; i < numbers.Count - 1; i++) {
+                long runningSum = numbers[i];
+
+                for (int j = i + 1; j < numbers.Count; j++)
+                {
+                    runningSum += numbers[j];
+
+                    if (targetSum == runningSum) {
+                        var seq = numbers.Skip(i).Take(j - i + 1);
+
+                        return seq.Min() + seq.Max();
+                    }
+                    
+                    if (runningSum > targetSum) {
+                        break;
+                    }
+                }
             }
 
             throw new InvalidOperationException("Should not happen");
@@ -40,7 +66,9 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override IEnumerable<object> SolvePartTwo()
         {
-            return null;
+            var target = (long)SolvePartOne().First();
+
+            yield return FindSum(InputLongs, target);
         }
 
         protected override void Asserts()
@@ -64,7 +92,13 @@ namespace AdventOfCode.Solutions.Year2020
 299
 277
 309
-576".Sp
+576".ToIntArray("\r\n").Select(i => (long)i).ToList();
+
+            var result = BreakCypher(testInput, 5, 5);
+
+            Assert.AreEqual(127L, result);
+
+            Assert.AreEqual(62L, FindSum(testInput, 127L));
         }
     }
 }
