@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -131,6 +132,13 @@ namespace AdventOfCode.Solutions
 
         protected virtual void Asserts()
         {
+        }
+
+
+        [DoesNotReturn]
+        protected void Fail()
+        {
+            throw new InvalidOperationException("Shouldn't get here");
         }
     }
 }
