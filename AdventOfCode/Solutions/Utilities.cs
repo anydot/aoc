@@ -62,9 +62,9 @@ namespace AdventOfCode.Solutions
             return new string(arr);
         }
 
-        public static int ManhattanDistance((int x, int y) a, (int x, int y) b)
+        public static int ManhattanDistance(Point a, Point b)
         {
-            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+            return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
         }
 
         public static double FindGCD(double a, double b) => (a % b == 0) ? b : FindGCD(b, a % b);

@@ -47,6 +47,7 @@ namespace AdventOfCode.Solutions
                 Asserts();
             } catch (Exception e) {
                 sb.AppendLine($"Assert Exception: {e.Message}");
+                sb.AppendLine(e.StackTrace);
                 Console.WriteLine(sb);
                 return false;
             }
@@ -138,7 +139,14 @@ namespace AdventOfCode.Solutions
         [DoesNotReturn]
         protected void Fail()
         {
-            throw new InvalidOperationException("Shouldn't get here");
+            throw new InvalidOperationException($"Shouldn't get here");
+        }
+
+        [DoesNotReturn]
+        protected T Fail<T>()
+        {
+            Fail();
+            return default;
         }
     }
 }
